@@ -1,0 +1,28 @@
+debug: false
+server:
+  port: 8080
+  error:
+    include-message: always
+spring:
+  application:
+    name: demo
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: false
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:spring_demo}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+springdoc:
+  swagger-ui:
+    path: /explorer
+  cache:
+    disabled: false
+
+
+
