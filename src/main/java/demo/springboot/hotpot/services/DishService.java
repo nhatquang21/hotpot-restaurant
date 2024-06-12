@@ -4,10 +4,11 @@ import demo.springboot.hotpot.entities.Dish;
 import demo.springboot.hotpot.exception.HttpErrorException;
 import demo.springboot.hotpot.models.SaveDishRQ;
 import demo.springboot.hotpot.repositories.DishRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,7 @@ public class DishService {
         return "D" + repository.fetchNextDishSlug();
     }
 
-    public Dish create(@Valid SaveDishRQ data) throws HttpErrorException {
+    public Dish create( SaveDishRQ data) throws HttpErrorException {
         var dataToCreate = Dish.builder()
                 .name(data.getName())
                 .note(data.getNote())
@@ -40,6 +41,11 @@ public class DishService {
         dish.setPriceUnit(dishDetails.getPriceUnit());
         Dish updatedDish = repository.save(dish);
         return updatedDish;
+    }
+
+    public BigDecimal getDishPrice(Long dishId) throws HttpErrorException {
+
+        return repository.getDishPrice(dishId);
     }
 
 }

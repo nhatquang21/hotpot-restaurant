@@ -1,5 +1,7 @@
 package demo.springboot.hotpot.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @Table(name = "dish", indexes = @Index(name = "dish_slug_uniq", columnList = "slug", unique = true))
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Dish extends AuditableEntity<Long>  {
 
     @Id
@@ -44,5 +47,6 @@ public class Dish extends AuditableEntity<Long>  {
     @Column(name = "price_unit", nullable = false)
     @Positive
     private BigDecimal priceUnit;
+
 
 }
